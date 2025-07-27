@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import business.services.PrinterService;
 import model.enteties.Student;
 
 public class StudentRepository {
     private List<Student> students = new ArrayList<>();
-
 
     public List<Student> getStudents() {
         return students;
@@ -21,13 +21,21 @@ public class StudentRepository {
     }
     public void updateStudent(Student student){
         Scanner in = new Scanner(System.in);
-        System.out.println("\nNEW NAME: ");
+        PrinterService.print("\nNEW NAME: ");
         student.setName(in.nextLine());
-        System.out.println("NEW EMAIL:");
+        PrinterService.print("NEW EMAIL:");
         student.setEmail(in.nextLine());
         System.out.println("NEW ADRESS:");
         student.setAdress(in.nextLine());
         in.close();
+    }
+
+    public void list(){
+        PrinterService.print("\nESTUDANTES CADASTRADOS---------");
+        int num = 1;
+        for (Student student : students) {
+            PrinterService.printf("%d - %s --- id:%d", num, student.getName(), student.getId());
+        }
     }
     
 }
