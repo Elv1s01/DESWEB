@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import business.services.PrinterService;
+import business.services.ReaderService;
 
 public class Discipline {
     private long cod;
@@ -66,6 +67,22 @@ public class Discipline {
             PrinterService.printf("%d - %s --- id:%d\n", num, student.getName(), student.getId());
             num++;
         }
+    }
+
+    public void update(){
+        ReaderService readerService = new ReaderService();
+        PrinterService.print("VAMOS ATUALIZAR A SUA DISCIPLINA.");
+        PrinterService.print("DIGITE O NOVO NOME DA DISCIPLINA:");
+        String name = readerService.nextLine();
+        PrinterService.print("\nDIGITE A NOVA CARGA HORÁRIA DA DISCIPLINA:");
+        int workload = readerService.nextInt();
+        readerService.nextLine();
+        PrinterService.print("\nDIGITE O NOVO CÓDIGO:");
+        long cod = readerService.nextInt();
+        setName(name);
+        setWorkload(workload);
+        setCod(cod);
+        PrinterService.print("A DISCIPLINA FOI ATUALIZADA COM SUCESSO.");
     }
 
 

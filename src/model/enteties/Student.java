@@ -1,5 +1,8 @@
 package model.enteties;
 
+import business.services.PrinterService;
+import business.services.ReaderService;
+
 public class Student {
     private long id;
     private String name, email, adress;
@@ -44,6 +47,25 @@ public class Student {
 
     public String toString(){
         return String.format("\nID: %d\nNAME: %s\nEMAIL: %s\nADRESS: %s", id, name, email, adress);
+    }
+
+     public void update(){
+        ReaderService readerService = new ReaderService();
+        PrinterService.print("VAMOS ATUALIZAR OS DADOS DO SEU ESTUDANTE.");
+        PrinterService.print("DIGITE O NOVO NOME");
+        String name = readerService.nextLine();
+        PrinterService.print("\nDIGITE O NOVO EMAIL DO ESTUDANTE:");
+        String email = readerService.nextLine();
+        PrinterService.print("\nDIGITE O NOVO ENDEREÇO:");
+        String adress = readerService.nextLine();
+        PrinterService.print("\nDIGITE O NOVO ID DO ESTUDANTE:");
+        long id = readerService.nextInt();
+
+        setName(name);
+        setEmail(email);
+        setAdress(adress);
+        setId(id);
+        PrinterService.print("O ESTUDANTE FOI ATUALIZADO COM SUCESSO.");
     }
      
 }

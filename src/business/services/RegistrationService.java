@@ -1,14 +1,17 @@
 package business.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import business.services.DTOs.DisciplineDTO;
+import business.services.DTOs.StudentDTO;
 import model.enteties.Discipline;
 import model.enteties.Student;
+import model.repository.DisciplineRepository;
 import model.repository.MainRepository;
 import model.repository.StudentRepository;
 
 public class RegistrationService {
-
     private MainRepository mainRepository = new MainRepository();
     private ReaderService readerService = new ReaderService();
     
@@ -100,16 +103,86 @@ public class RegistrationService {
     }
 
     public void delStudent(){
-        PrinterService.print("ESCOLHA ENTRE OS ALUNOS CADASTROS PARA DELETAR.\n");
+        List<Student> students = mainRepository.getStudentRepository().getStudents();
+        PrinterService.print("ESCOLHA ENTRE OS ALUNOS CADASTRADOS PARA DELETAR.\n");
         mainRepository.getStudentRepository().list();
-        PrinterService.print("ESCOLHA ENTRE OS ESTUDANTES QUAL DESEJA REMOVER:");
-        
+        PrinterService.print("\nESCOLHA ENTRE OS ESTUDANTES QUAL DESEJA REMOVER:");
+        while (true) {
+            int choice = readerService.nextInt();
+            if (choice > 0 && choice <= students.size()) {
+                mainRepository.getStudentRepository().delStudent(students.get(choice-1));
+                break;
+            }
+            PrinterService.print("DIGITE UMA OPÇÃO DENTRE AS LISTADAS, POR FAVOR.");
+        }
+        PrinterService.print("ESTUDANTE REMOVIDO COM SUCESSO.");
     }
     
+    public void delDiscipline(){
+        DisciplineRepository disciplineRepository = mainRepository.getDisciplineRepository();
+        PrinterService.print("ESCOLHA UMA ENTRE AS DISCIPLINAS PARA DELETAR.\n");
+        disciplineRepository.list();
+        PrinterService.print("ESCOLHA UMA ENTRE AS DISCIPLINAS LISTADAS PARA APAGAR.");
+        while (true) {
+            int choice = readerService.nextInt();
+            if (choice > 0 && choice <= disciplineRepository.getDisciplines().size()) {
+                disciplineRepository.delDiscipline(disciplineRepository.getDisciplines().get(choice-1));
+                break;
+            }
+            PrinterService.print("POR FAVOR, DIGITE UMA OPÇÃO VÁLIDA. TENTE NOVAMENTE.");
+        }
+        PrinterService.print("\nDISCIPLINA REMOVIDA COM SUCESSO.");
+    }
     public MainRepository getMainRepository() {
         return mainRepository;
     }
     
+    public void updateDiscipline(){
+        DisciplineRepository disciplineRepository = mainRepository.getDisciplineRepository();
+        PrinterService.print("ESCOLHA UMA ENTRE AS SEGUINTES DISCIPLINAS PARA ATUALIZAR.");
+        disciplineRepository.list();
+        while (true) {
+            PrinterService.print("------>");
+            int choice = readerService.nextInt();
+            if (choice > 0 && choice <= disciplineRepository.getDisciplines().size()) {
+                disciplineRepository.getDisciplines().get(choice-1).update();
+                break;
+            }
+            PrinterService.print("\nPOR FAVOR, DIGITE UMA OPÇÃO VÁLIDA. TENTE NOVAMENTE.");
+        }
+    }
 
+    public void updateStudent(){
+        StudentRepository studentRepository = mainRepository.getStudentRepository();
+        PrinterService.print("ESCOLHA UM ENTRE OS ESTUDANTES CADASTRADOS PARA ATUALIZAR.\n");
+        studentRepository.list();
+        while (true) {
+            PrinterService.print("------>");
+            int choice = readerService.nextInt();
+            if (choice > 0 && choice <= studentRepository.getStudents().size()) {
+                studentRepository.getStudents().get(choice-1).update();
+                break;
+            }
+            PrinterService.print("\nPOR FAVOR, DIGITE UMA OPÇÃO VÁLIDA. TENTE NOVAMENTE.");
+        }
+    }
+
+    public List<StudentDTO> conversionStudentToDTO(){
+        List<StudentDTO> studentDTOs = new ArrayList<>();
+        List<Student> students = mainRepository.getStudentRepository().getStudents();
+        for (Student student : students) {
+            studentDTOs.add(new StudentDTO(student.getId(), student.getName(), student.getEmail(), student.getAdress()));
+        }
+        return studentDTOs;
+    }
+
+    public List<DisciplineDTO> conversionDisciplineToDTO(){
+        List<DisciplineDTO> disciplineDTOs = new ArrayList<>();
+        List<Discipline> disciplines = mainRepository.getDisciplineRepository().getDisciplines();
+        for (Discipline discipline : disciplines) {
+            disciplineDTOs.add(new DisciplineDTO(discipline.getCod(), discipline.getName(), discipline.getWorkload()));
+        }
+        return disciplineDTOs;
+    }
     
 }

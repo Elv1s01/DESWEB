@@ -38,6 +38,7 @@ public class MenuOption {
     }
 
     public void studentInDisciplineRegistration(){
+
         PrinterService.print("\nVAMOS CADASTRAR UM ESTUDANTE EM UMA DISCIPLINA.");
         PrinterService.print("ESCOLHA UM ENTRE OS ESTUDANTES CADASTRADOS.");
         registrationService.studentInDisciplineRegistration();
@@ -45,6 +46,7 @@ public class MenuOption {
     }
 
     public void showListReagistration(){
+
         PrinterService.print("------------------------------------------\n");
         registrationService.showListReagistration();
         PrinterService.print("\n------------------------------------------");
@@ -54,8 +56,25 @@ public class MenuOption {
         //PrinterService.print("VAMOS DELETAR UM ALUNO DE UMA DISCIPLINA.");
         registrationService.delStudentToDiscipline();
     }
+
     public void delStudent(){
         PrinterService.print("VAMOS DELETAR UM ESTUDANTE CADASTRADO.");
+        registrationService.delStudent();
+    }
+
+    public void delDiscipline(){
+        PrinterService.print("VAMOS DELETAR UMA DISCIPLINA.");
+        registrationService.delDiscipline();
+    }
+
+    public void updateDiscipline(){
+        registrationService.updateDiscipline();
+        PrinterService.print("DISCIPLINA ATUALIZADA COM SUCESSO.");
+    }
+
+    public void updateStudent(){
+        registrationService.updateStudent();
+        PrinterService.print("ESTUDANTE ATUALIZADO COM SUCESSO.");
     }
     
 }
