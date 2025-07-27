@@ -34,7 +34,8 @@ public class StudentRepository {
         PrinterService.print("\nESTUDANTES CADASTRADOS---------");
         int num = 1;
         for (Student student : students) {
-            PrinterService.printf("%d - %s --- id:%d", num, student.getName(), student.getId());
+            PrinterService.printf("%d - %s --- id:%d\n", num, student.getName(), student.getId());
+            num++;
         }
     }
     

@@ -18,6 +18,7 @@ public class ReaderService {
                 return value;
             } catch (InputMismatchException e) {
                 PrinterService.print("\nVOCÊ DIGITOU UM NÚMERO INVÁLIDO, TENTE NOVAMENTE...");
+                in.nextLine();
             }
         }
     }

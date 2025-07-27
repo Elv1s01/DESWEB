@@ -32,7 +32,8 @@ public class DisciplineRepository {
         PrinterService.print("\nDISCIPLINAS CADASTRADAS---------");
         int num = 1;
         for (Discipline discipline : disciplines) {
-            PrinterService.printf("%d - %s --- id:%d", num, discipline.getName(), discipline.getCod());
+            PrinterService.printf("%d - %s --- id:%d\n", num, discipline.getName(), discipline.getCod());
+            num++;
         }
     }
 

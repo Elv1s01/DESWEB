@@ -3,6 +3,8 @@ package model.enteties;
 import java.util.ArrayList;
 import java.util.List;
 
+import business.services.PrinterService;
+
 public class Discipline {
     private long cod;
     private String name;
@@ -53,6 +55,17 @@ public class Discipline {
     }
     public void delStudentInDiscipline(Student student){
         students.add(student);
+    }
+
+    public void list(){
+        int num = 1;
+        if (students.isEmpty()) {
+            PrinterService.print("NÃO HÁ ESTUDANTES MATRICULADOS NESSA MÁTERIA AINDA.");
+        }
+        for (Student student : students) {
+            PrinterService.printf("%d - %s --- id:%d\n", num, student.getName(), student.getId());
+            num++;
+        }
     }
 
 

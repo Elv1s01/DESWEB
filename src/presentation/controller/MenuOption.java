@@ -43,5 +43,19 @@ public class MenuOption {
         registrationService.studentInDisciplineRegistration();
         PrinterService.print("\nESTUDANTE CADASTRADO COM SUCESSO NA DISCIPLINA.");
     }
+
+    public void showListReagistration(){
+        PrinterService.print("------------------------------------------\n");
+        registrationService.showListReagistration();
+        PrinterService.print("\n------------------------------------------");
+    }
+
+    public void delStudentToDiscipline(){
+        //PrinterService.print("VAMOS DELETAR UM ALUNO DE UMA DISCIPLINA.");
+        registrationService.delStudentToDiscipline();
+    }
+    public void delStudent(){
+        PrinterService.print("VAMOS DELETAR UM ESTUDANTE CADASTRADO.");
+    }
     
 }
